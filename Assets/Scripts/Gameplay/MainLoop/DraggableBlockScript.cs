@@ -8,8 +8,6 @@ using UnityEngine.UI;
 
 public class DraggableBlockScript : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-
-
     [SerializeField] private Image image;
     public TextMeshProUGUI textCount;
 
@@ -17,7 +15,6 @@ public class DraggableBlockScript : MonoBehaviour, IBeginDragHandler, IDragHandl
     [HideInInspector] public int count = 1;
     [HideInInspector] public Transform parentAfterDrag;
 
-    
 
     private void Start()
     {

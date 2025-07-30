@@ -45,8 +45,6 @@ public class InventoryScript : MonoBehaviour
         GameObject newBlockGo = Instantiate(draggableBlockPrefab, slot.transform);
         DraggableBlockScript draggableBlock = newBlockGo.GetComponent<DraggableBlockScript>();
         draggableBlock.InitializeBlock(block);
-
-
     }
 
 }

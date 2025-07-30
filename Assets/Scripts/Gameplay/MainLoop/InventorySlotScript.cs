@@ -13,16 +13,4 @@ public class InventorySlotScript : MonoBehaviour, IDropHandler
             block.parentAfterDrag = transform;
         }
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
