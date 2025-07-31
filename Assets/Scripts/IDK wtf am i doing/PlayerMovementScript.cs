@@ -4,45 +4,62 @@ using UnityEngine;
 
 public class PlayerMovementScript : MonoBehaviour
 {
-
-    [SerializeField] private TrailRenderer tr;
+    [Header("References")]
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private TrailRenderer trail;
+
+    [Header("Movement Settings")]
+    [SerializeField] private float moveSpeed = 5f;
+
+    [Header("Dash Settings")]
+    [SerializeField] private float dashingPower = 24f;
+    [SerializeField] private float dashingDuration = 0.2f;
+    [SerializeField] private float dashingCooldown = 1f;
+    [SerializeField] private KeyCode dashingKeyCode = KeyCode.LeftShift;
+    [SerializeField] private AnimationCurve dashingCurve;
+
+
     private Vector3 moveDirection;
-    [SerializeField] private float moveSpeed = 0f;
 
     private bool canDash = true;
     private bool isDashing;
-    
-    [SerializeField] private float dashingPower = 24f;
-    [SerializeField] private float dashingTime = 0.2f;
-    [SerializeField] private float dashingCooldown = 1f;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
-        
+        if (!rb)
+        {
+            rb = GetComponent<Rigidbody>();
+        }
+        if (!trail)
+        {
+            trail = GetComponent<TrailRenderer>();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        ProcessInputs();
+        HandleInput();
+
+        if (!isDashing)
+        {
+            Move();
+        }
     }
-    void FixedUpdate()
+
+    private void HandleInput()
     {
-        Move();
-    }
-    void ProcessInputs()
-    {
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveZ = Input.GetAxisRaw("Vertical");
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
        
-        moveDirection = new Vector3(moveX,0, moveZ).normalized;
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        moveDirection = new Vector3(horizontal, 0, vertical).normalized;
+
+        if (Input.GetKeyDown(dashingKeyCode) && canDash && moveDirection != Vector3.zero)
         {
             StartCoroutine(Dash());
         }
     }
-    void Move()
+
+    private void Move()
     {
         if (isDashing)
         {
@@ -50,16 +67,34 @@ public class PlayerMovementScript : MonoBehaviour
         }
         rb.velocity = new Vector3(moveDirection.x*moveSpeed,0, moveDirection.z * moveSpeed); 
     }
+
     private IEnumerator Dash()
     {
         canDash = false;
         isDashing = true;
-        rb.velocity = new Vector3(moveDirection.x* dashingPower,0f, moveDirection.z * dashingPower);
-        tr.emitting = true;
-        yield return new WaitForSeconds(dashingTime);
-        tr.emitting = false;
-        rb.velocity = new Vector3(0, 0, 0);
+        //rb.velocity = new Vector3(moveDirection.x* dashingPower,0f, moveDirection.z * dashingPower);
+        trail.emitting = true;
+
+        float elapsed = 0f;
+        Vector3 dashDirection = moveDirection;
+
+        while (elapsed < dashingDuration)
+        {
+            float t = elapsed / dashingDuration;
+            float power = dashingCurve.Evaluate(t) * dashingPower;
+
+
+            rb.velocity = dashDirection * power;
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+
+
+        rb.velocity = Vector3.zero;
+        trail.emitting = false;
         isDashing = false;
+
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
     }
