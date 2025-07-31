@@ -2466,6 +2466,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1957aa4f1b985764eb6adecd5197fd26, type: 2}
   - {fileID: 11400000, guid: b7f2b9429b6acd1478dea049c87cdd1f, type: 2}
   - {fileID: 11400000, guid: b33134dcfeb45224bb27e53542890b4a, type: 2}
+  - {fileID: 11400000, guid: 7a2b053491cb4514ca5e12bb247b7002, type: 2}
 --- !u!4 &579395565
 Transform:
   m_ObjectHideFlags: 0
@@ -2942,6 +2943,7 @@ MonoBehaviour:
   - {fileID: 1109779846}
   - {fileID: 125372312}
   - {fileID: 660585350}
+  PSS: {fileID: 1158740417}
   textPlayer: {fileID: 836311915}
   startBlockIndex: 0
   endBlockIndex: 0
@@ -3383,6 +3385,7 @@ MonoBehaviour:
   blocksTypes:
   - {fileID: 11400000, guid: 1957aa4f1b985764eb6adecd5197fd26, type: 2}
   - {fileID: 11400000, guid: b7f2b9429b6acd1478dea049c87cdd1f, type: 2}
+  - {fileID: 11400000, guid: b33134dcfeb45224bb27e53542890b4a, type: 2}
   - {fileID: 11400000, guid: b33134dcfeb45224bb27e53542890b4a, type: 2}
 --- !u!1001 &996159332
 PrefabInstance:
@@ -5241,6 +5244,34 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8a2a16c007483984680fb22c8042f43d, type: 2}
+    - target: {fileID: 3503103224700122379, guid: 76ae9e0c110384647a759fcf2d859e90, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 3503103224700122379, guid: 76ae9e0c110384647a759fcf2d859e90, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 3503103224700122379, guid: 76ae9e0c110384647a759fcf2d859e90, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 3503103224700122379, guid: 76ae9e0c110384647a759fcf2d859e90, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.272
+      objectReference: {fileID: 0}
+    - target: {fileID: 3503103224700122379, guid: 76ae9e0c110384647a759fcf2d859e90, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.163
+      objectReference: {fileID: 0}
+    - target: {fileID: 3503103224700122379, guid: 76ae9e0c110384647a759fcf2d859e90, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.214
+      objectReference: {fileID: 0}
+    - target: {fileID: 3503103224700122379, guid: 76ae9e0c110384647a759fcf2d859e90, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4241187847616156835, guid: 76ae9e0c110384647a759fcf2d859e90, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -5249,6 +5280,30 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3a651f6ed0f4cda44939135f54c8c792, type: 2}
+    - target: {fileID: 5998569011433006967, guid: 76ae9e0c110384647a759fcf2d859e90, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 5998569011433006967, guid: 76ae9e0c110384647a759fcf2d859e90, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 5998569011433006967, guid: 76ae9e0c110384647a759fcf2d859e90, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 5998569011433006967, guid: 76ae9e0c110384647a759fcf2d859e90, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.133
+      objectReference: {fileID: 0}
+    - target: {fileID: 5998569011433006967, guid: 76ae9e0c110384647a759fcf2d859e90, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.852
+      objectReference: {fileID: 0}
+    - target: {fileID: 5998569011433006967, guid: 76ae9e0c110384647a759fcf2d859e90, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8449996119470504636, guid: 76ae9e0c110384647a759fcf2d859e90, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -7722,7 +7777,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

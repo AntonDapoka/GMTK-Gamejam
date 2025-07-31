@@ -12,6 +12,7 @@ public class BlockAssembleScript : MonoBehaviour
     [SerializeField] private BlockTypesHolderScript typesHolder;
     [SerializeField] private AssemblerSlotScript[] assemblerSlots;
 
+    [SerializeField] private PlayerShootingScript PSS;
     [SerializeField] private TextMeshPro textPlayer;
 
     [SerializeField] private int startBlockIndex;
@@ -97,10 +98,25 @@ public class BlockAssembleScript : MonoBehaviour
 
     private void ActivateBlock(DraggableBlockScript block, int index)
     {
-        if (block.block.typeBlock == BlockType.Write)// && disabled[index] != true)
+        BlockType type = block.block.typeBlock;
+
+        if (type == BlockType.Write)// && disabled[index] != true)
         {
-            Debug.Log("Hello World");
             textPlayer.text = block.GetComponentInChildren<WriteBlockScript>().GetText();
+            textPlayer.gameObject.SetActive(true);
+            StartCoroutine(WaitAndTurnOff(textPlayer.gameObject, delay));
         }
+
+        if (type == BlockType.Shoot)// && disabled[index] != true)
+        {
+            PSS.ShootBullet();
+        }
+    }
+
+    private IEnumerator WaitAndTurnOff(GameObject gameObject, float duration)
+    {
+
+        yield return new WaitForSeconds(duration);
+        gameObject.SetActive(false);
     }
 }

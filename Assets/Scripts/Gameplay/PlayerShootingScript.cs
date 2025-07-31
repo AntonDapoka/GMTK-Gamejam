@@ -13,7 +13,7 @@ public class PlayerShootingScript : MonoBehaviour
 
     private bool isShooting = false;
 
-    private void Update()
+    /*private void Update()
     {
         if (isShooting == false && Input.GetMouseButtonDown(0))
         {
@@ -24,7 +24,7 @@ public class PlayerShootingScript : MonoBehaviour
         {
             isShooting = false;
         }
-    }
+    }*/
 
     private IEnumerator ShootingLoop()
     {
@@ -35,7 +35,7 @@ public class PlayerShootingScript : MonoBehaviour
         }
     }
 
-    private void ShootBullet()
+    public void ShootBullet()
     {
         Vector3 direction = (aimTarget.position - firePoint.position).normalized;
         GameObject bullet = Instantiate(prefabBullet, firePoint.position, Quaternion.identity);
