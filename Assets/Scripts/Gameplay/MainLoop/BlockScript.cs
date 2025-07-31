@@ -12,7 +12,7 @@ public class BlockScript : ScriptableObject
 
     [Header("Only UI")]
     public bool isStackable = true;
-    public Sprite sprite;
+    public GameObject prefab;
 
 }
 

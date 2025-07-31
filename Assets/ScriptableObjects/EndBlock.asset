@@ -16,5 +16,5 @@ MonoBehaviour:
   typeBlock: 2
   typeAction: 0
   range: {x: 5, y: 4}
-  isStackable: 1
-  sprite: {fileID: -408403991, guid: 35c140804a09b9f49978bac410d0a5da, type: 3}
+  isStackable: 0
+  prefab: {fileID: 7843301527956143239, guid: d1dcb0e1d9f4a26419a24f71f6304302, type: 3}

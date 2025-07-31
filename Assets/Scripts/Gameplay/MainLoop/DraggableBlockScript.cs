@@ -5,10 +5,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static Unity.VisualScripting.Member;
+using static UnityEngine.GraphicsBuffer;
 
 public class DraggableBlockScript : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [SerializeField] private Image image;
+    [SerializeField] private GameObject blockContent;
     public TextMeshProUGUI textCount;
 
     [HideInInspector] public BlockScript block;
@@ -24,7 +27,21 @@ public class DraggableBlockScript : MonoBehaviour, IBeginDragHandler, IDragHandl
     public void InitializeBlock(BlockScript newBlock)
     {
         block = newBlock;
-        image.sprite = newBlock.sprite;
+
+        blockContent = Instantiate(newBlock.prefab, transform);
+
+        // Если внутри newBlock.prefab есть изображения/тексты:
+        foreach (var img in blockContent.GetComponentsInChildren<Image>())
+        {
+            img.raycastTarget = false;
+        }
+        foreach (var txt in blockContent.GetComponentsInChildren<TMPro.TextMeshProUGUI>())
+        {
+            txt.raycastTarget = false;
+        }
+        //CopyImageSettings(blockContent.GetComponent<Image>(), image);
+        blockContent.GetComponent<Image>().enabled = false;
+   
         RefreshCount();
     }
 
