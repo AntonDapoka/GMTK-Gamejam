@@ -5,12 +5,14 @@ using UnityEngine;
 public class BulletBehaivourScript : MonoBehaviour
 {
     [SerializeField] private float speed = 10f;
+    [SerializeField] private float lifeDuration = 1f;
     private Vector3 direction;
 
     public void SetDirection(Vector3 dir)
     {
         dir.y = 0f;
         direction = dir.normalized;
+        StartCoroutine(SelfDestruct());
     }
 
     private void Update()
@@ -18,8 +20,9 @@ public class BulletBehaivourScript : MonoBehaviour
         transform.position += direction * speed * Time.deltaTime;
     }
 
-    private void DestroyBullet()
+    private IEnumerator SelfDestruct()
     {
+        yield return new WaitForSeconds(lifeDuration);
         Destroy(gameObject);
     }
 }

@@ -50,8 +50,19 @@ public class PlayerMovementScript : MonoBehaviour
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
-       
-        moveDirection = new Vector3(horizontal, 0, vertical).normalized;
+
+        Vector3 inputDirection = new Vector3(horizontal, 0f, vertical).normalized;
+
+        if (inputDirection != Vector3.zero)
+        {
+            // Поворот на 45 градусов вокруг Y
+            Quaternion rotation = Quaternion.Euler(0f, -45f, 0f);
+            moveDirection = rotation * inputDirection;
+        }
+        else
+        {
+            moveDirection = Vector3.zero;
+        }
 
         if (Input.GetKeyDown(dashingKeyCode) && canDash && moveDirection != Vector3.zero)
         {
@@ -72,7 +83,6 @@ public class PlayerMovementScript : MonoBehaviour
     {
         canDash = false;
         isDashing = true;
-        //rb.velocity = new Vector3(moveDirection.x* dashingPower,0f, moveDirection.z * dashingPower);
         trail.emitting = true;
 
         float elapsed = 0f;

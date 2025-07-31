@@ -7,27 +7,47 @@ public class PlayerShootingScript : MonoBehaviour
 
     [SerializeField] private GameObject prefabBullet;
     [SerializeField] private Transform firePoint;
+    [SerializeField] private Transform aimTarget; // цель, в которую стреляем
+    [SerializeField] private float shootInterval = 0.2f; 
+
+
+    private bool isShooting = false;
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (isShooting == false && Input.GetMouseButtonDown(0))
+        {
+            isShooting = true;
+            StartCoroutine(ShootingLoop());
+        }
+        else if (isShooting == true && Input.GetMouseButtonDown(0))
+        {
+            isShooting = false;
+        }
+    }
+
+    private IEnumerator ShootingLoop()
+    {
+        while (isShooting)
         {
             ShootBullet();
+            yield return new WaitForSeconds(shootInterval);
         }
     }
 
     private void ShootBullet()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero); // плоскость XZ
+        Vector3 direction = (aimTarget.position - firePoint.position).normalized;
+        GameObject bullet = Instantiate(prefabBullet, firePoint.position, Quaternion.identity);
 
-        if (groundPlane.Raycast(ray, out float enter))
+        BulletBehaivourScript bulletScript = bullet.GetComponent<BulletBehaivourScript>();
+        if (bulletScript != null)
         {
-            Vector3 targetPoint = ray.GetPoint(enter);
-            Vector3 direction = targetPoint - firePoint.position;
-
-            GameObject bullet = Instantiate(prefabBullet, firePoint.position, Quaternion.identity);
-            bullet.GetComponent<BulletBehaivourScript>().SetDirection(direction);
+            bulletScript.SetDirection(direction);
+        }
+        else
+        {
+            Debug.Log("Problemssss");
         }
     }
 }
