@@ -56,7 +56,7 @@ public class PlayerMovementScript : MonoBehaviour
         if (inputDirection != Vector3.zero)
         {
             // Поворот на 45 градусов вокруг Y
-            Quaternion rotation = Quaternion.Euler(0f, -45f, 0f);
+            Quaternion rotation = Quaternion.Euler(0f, -135f, 0f);
             moveDirection = rotation * inputDirection;
         }
         else

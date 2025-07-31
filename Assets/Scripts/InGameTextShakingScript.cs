@@ -16,25 +16,32 @@ public class InGameTextShakingScript : MonoBehaviour
     private float angle;
     private float speed;
     private float timeOffset;
-    private Quaternion startRotation;
+
+    [SerializeField] private Camera mainCamera;
 
     private void Start()
     {
-        startRotation = transform.localRotation;
+        //mainCamera = Camera.main;
+
         angle = Random.Range(angleRange.x, angleRange.y);
         speed = Random.Range(speedRange.x, speedRange.y);
-
         timeOffset = Random.Range(0f, 100f);
     }
 
     private void Update()
     {
-        float t = Mathf.Repeat(Time.time * speed + timeOffset, 1f);
-        float curveValue = swingCurve.Evaluate(t); 
+        if (mainCamera == null) return;
 
+        // Вычисляем значение кривой для покачивания
+        float t = Mathf.Repeat(Time.time * speed + timeOffset, 1f);
+        float curveValue = swingCurve.Evaluate(t);
         float swing = Mathf.Lerp(-1f, 1f, curveValue);
         float z = swing * angle;
 
-        transform.localRotation = startRotation * Quaternion.Euler(0, 0, z);
+        // Повернуть объект лицом к камере (billboard)
+        transform.rotation = Quaternion.LookRotation(transform.position - mainCamera.transform.position);
+
+        // Добавить покачивание (локально)
+        transform.rotation *= Quaternion.Euler(0, 0, z);
     }
 }

@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.glairedaggers.retrotvfx": {
+      "version": "file:D:/Games that I'm trying to make/Super 灯/RetroTVFX-2.0.0",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.unity.2d.animation": {
       "version": "9.1.2",
       "depth": 1,

@@ -5,6 +5,7 @@ using UnityEngine;
 public class InventoryScript : MonoBehaviour
 {
     [SerializeField] private int maxStackedBlocks = 5;
+    public int MaxStackedBlocks => maxStackedBlocks;
     [SerializeField] private InventorySlotScript[] inventorySlots;
     [SerializeField] private GameObject draggableBlockPrefab;
 
@@ -46,5 +47,4 @@ public class InventoryScript : MonoBehaviour
         DraggableBlockScript draggableBlock = newBlockGo.GetComponent<DraggableBlockScript>();
         draggableBlock.InitializeBlock(block);
     }
-
 }
