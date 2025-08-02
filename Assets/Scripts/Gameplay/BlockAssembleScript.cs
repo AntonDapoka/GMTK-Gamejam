@@ -119,7 +119,7 @@ public class BlockAssembleScript : MonoBehaviour
     private IEnumerator WaitAndTurnOff(GameObject gameObject, float duration)
     {
 
-        yield return new WaitForSeconds(duration);
+        yield return new WaitForSeconds(duration*2);
         gameObject.SetActive(false);
     }
 }
