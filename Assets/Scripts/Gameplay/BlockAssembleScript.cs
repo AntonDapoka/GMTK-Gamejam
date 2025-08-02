@@ -15,6 +15,9 @@ public class BlockAssembleScript : MonoBehaviour
     [SerializeField] private PlayerShootingScript PSS;
     [SerializeField] private TextMeshPro textPlayer;
 
+    [SerializeField] private Color color1;
+    [SerializeField] private Color color2;
+
     [SerializeField] private int startBlockIndex;
     [SerializeField] private int endBlockIndex;
     [SerializeField] private float delay = 1f;
@@ -53,7 +56,7 @@ public class BlockAssembleScript : MonoBehaviour
                 for (int i = minIndex; i < maxIndex; i++)
                 {
                     AssemblerSlotScript slot = assemblerSlots[i];
-                    slot.GetComponent<Image>().color = UnityEngine.Random.ColorHSV(0f, 1f, 0.8f, 1f, 0.8f, 1f);
+                    slot.GetComponent<Image>().color = i % 2 == 0 ? color1 : color2;
                     DraggableBlockScript blockInSlot = slot.GetComponentInChildren<DraggableBlockScript>();
                     if (blockInSlot != null)
                     {

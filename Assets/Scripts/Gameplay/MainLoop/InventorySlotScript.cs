@@ -48,13 +48,13 @@ public class InventorySlotScript : MonoBehaviour, IDropHandler
             {
                 // Если что-то осталось, блок возвращается на прежнее место
                 droppedBlock.RefreshCount();
-                droppedBlock.parentAfterDrag = droppedBlock.parentAfterDrag;
+                //droppedBlock.parentAfterDrag = droppedBlock.parentAfterDrag;
             }
         }
         else
         {
             // Если стакнуть нельзя – возвращаем предмет на место
-            droppedBlock.parentAfterDrag = droppedBlock.parentAfterDrag;
+            //droppedBlock.parentAfterDrag = droppedBlock.parentAfterDrag;
         }
     }
 }
