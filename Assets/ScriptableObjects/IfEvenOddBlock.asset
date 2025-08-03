@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8168926aae09aee449fdd10a0591452f, type: 3}
-  m_Name: WriteBlock
+  m_Name: IfEvenOddBlock
   m_EditorClassIdentifier: 
   tile: {fileID: 0}
-  typeBlock: 1
+  typeBlock: 4
   typeAction: 0
   range: {x: 5, y: 4}
   isStackable: 0
   isInteractable: 1
-  prefab: {fileID: 7843301527956143239, guid: eaeb7b233efacc9429b1805649949755, type: 3}
+  prefab: {fileID: 7843301527956143239, guid: a7689592c66e8724f8a5353296ac6ef9, type: 3}

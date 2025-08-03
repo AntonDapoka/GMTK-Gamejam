@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerShootingScript : MonoBehaviour
 {
 
-    [SerializeField] private GameObject prefabBullet;
+    [SerializeField] private GameObject prefabBulletBasic;
+    [SerializeField] private GameObject prefabBulletMighty;
+    [SerializeField] private GameObject prefabBulletRandom;
     [SerializeField] private Transform firePoint;
     [SerializeField] private Transform aimTarget; // цель, в которую стреляем
     [SerializeField] private float shootInterval = 0.2f; 
@@ -24,7 +26,7 @@ public class PlayerShootingScript : MonoBehaviour
         {
             isShooting = false;
         }
-    }*/
+    }
 
     private IEnumerator ShootingLoop()
     {
@@ -33,12 +35,40 @@ public class PlayerShootingScript : MonoBehaviour
             ShootBullet();
             yield return new WaitForSeconds(shootInterval);
         }
-    }
+    }*/
 
-    public void ShootBullet()
+    public void ShootBullet(BlockType blockType)
     {
+
+        GameObject prefabToSpawn;
+
+        switch (blockType)
+        {
+            case BlockType.BulletFire:
+                prefabToSpawn = prefabBulletMighty;
+                break;
+            case BlockType.BulletRandom:
+                if (Random.Range(0, 2) == 0)
+                    prefabToSpawn = prefabBulletMighty;  // как BulletFire
+                else
+                    prefabToSpawn = prefabBulletBasic;
+                break;
+            case BlockType.BulletBasic:
+                prefabToSpawn = prefabBulletBasic;
+                break;
+            default:
+                prefabToSpawn = null ;
+                break;
+        }
+
+        if (prefabToSpawn == null)
+        {
+            //Debug.LogError($"Prefab for blockType {blockType} is not assigned!");
+            return;
+        }
+
         Vector3 direction = (aimTarget.position - firePoint.position).normalized;
-        GameObject bullet = Instantiate(prefabBullet, firePoint.position, Quaternion.identity);
+        GameObject bullet = Instantiate(prefabToSpawn, firePoint.position, Quaternion.identity);
 
         BulletBehaivourScript bulletScript = bullet.GetComponent<BulletBehaivourScript>();
         if (bulletScript != null)

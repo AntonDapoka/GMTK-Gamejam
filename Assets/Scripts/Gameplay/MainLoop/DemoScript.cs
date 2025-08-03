@@ -12,11 +12,11 @@ public class DemoScript : MonoBehaviour
         bool result = InventoryScript.AddBlock(blocksToPickUp[id]);
         if (result)
         {
-            Debug.Log("ItemAdded");
+            //Debug.Log("ItemAdded");
         }
         else
         {
-            Debug.Log("ItemNotAdded");
+            ///ebug.Log("ItemNotAdded");
         }
     }
 }

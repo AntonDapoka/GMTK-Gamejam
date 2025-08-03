@@ -16,5 +16,6 @@ MonoBehaviour:
   typeBlock: 3
   typeAction: 0
   range: {x: 5, y: 4}
-  isStackable: 1
+  isStackable: 0
+  isInteractable: 1
   prefab: {fileID: 7843301527956143239, guid: 5aba42f5af0f2fc45b435dd4b8811cdb, type: 3}

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: RandomBulletBlock
   m_EditorClassIdentifier: 
   tile: {fileID: 0}
-  typeBlock: 11
+  typeBlock: 12
   typeAction: 2
   range: {x: 5, y: 4}
-  isStackable: 1
+  isStackable: 0
   isInteractable: 1
   prefab: {fileID: 7843301527956143239, guid: ff72c9b138343a94bb00399dc71b54e5, type: 3}

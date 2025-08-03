@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: EnemyCountBlock
   m_EditorClassIdentifier: 
   tile: {fileID: 0}
-  typeBlock: 14
+  typeBlock: 15
   typeAction: 2
   range: {x: 5, y: 4}
-  isStackable: 1
+  isStackable: 0
   isInteractable: 1
   prefab: {fileID: 7843301527956143239, guid: 7301e9db458ebdb47973961af5b3f515, type: 3}

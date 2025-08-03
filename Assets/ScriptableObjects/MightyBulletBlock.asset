@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: MightyBulletBlock
   m_EditorClassIdentifier: 
   tile: {fileID: 0}
-  typeBlock: 9
+  typeBlock: 10
   typeAction: 2
   range: {x: 5, y: 4}
-  isStackable: 1
+  isStackable: 0
   isInteractable: 1
   prefab: {fileID: 7843301527956143239, guid: 6cd1c9eaaf3fa824e920a59a837ff45c, type: 3}

@@ -43,7 +43,6 @@ public class BlockAssembleScript : MonoBehaviour
 
     private IEnumerator MainLoop()
     {
-
         while (true)
         {
             int minIndex = startBlockIndex;
@@ -53,24 +52,31 @@ public class BlockAssembleScript : MonoBehaviour
             {
                 for (int i = minIndex; i < maxIndex; i++)
                 {
+                    // Сначала сбрасываем цвет всех слотов в нормальный
+                    for (int j = 0; j < assemblerSlots.Length; j++)
+                    {
+                        Image img = assemblerSlots[j].GetComponent<Image>();
+                        if (img != null)
+                            img.color = Color.white;
+                    }
+
                     AssemblerSlotScript slot = assemblerSlots[i];
-                    //slot.GetComponent<Image>().color = i % 2 == 0 ? color1 : color2;
-                    //slot.GetComponent<Image>().color/ = 1f;
+
+                    // Затемняем текущий слот
+                    var currentImage = slot.GetComponent<Image>();
+                    if (currentImage != null)
+                        currentImage.color = Color.white * 0.7f;
+
                     DraggableBlockScript blockInSlot = slot.GetComponentInChildren<DraggableBlockScript>();
                     if (blockInSlot != null)
                     {
                         ActivateBlock(blockInSlot, i);
                     }
 
-
                     yield return new WaitForSeconds(delay);
                 }
-                    //assemblerSlots[i].GetComponent<Image>().color = Color.random;
             }
             yield return new WaitForSeconds(delay);
-
-            //Debug.Log("-----------------------------------------------");
-            //index = (index + 1) % assemblerSlots.Length;
         }
     }
 
@@ -110,13 +116,27 @@ public class BlockAssembleScript : MonoBehaviour
 
         if (type == BlockType.Shoot)// && disabled[index] != true)
         {
-            PSS.ShootBullet();
+            foreach (Image slotImage in block.slotImages)
+            {
+                if (slotImage == null) continue;
+
+                DraggableBlockScript blockNew = slotImage.GetComponentInChildren<DraggableBlockScript>();
+                if (blockNew != null)
+                {
+                    PSS.ShootBullet(blockNew.block.typeBlock);
+                    Debug.Log(blockNew.block.typeBlock);
+                }
+            }
+        }
+
+        if (type == BlockType.IfEvenOdd)// && disabled[index] != true)
+        {
+            
         }
     }
 
     private IEnumerator WaitAndTurnOff(GameObject gameObject, float duration)
     {
-
         yield return new WaitForSeconds(duration*2);
         gameObject.SetActive(false);
     }

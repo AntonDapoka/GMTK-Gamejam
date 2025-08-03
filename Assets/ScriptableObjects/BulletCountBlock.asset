@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: BulletCountBlock
   m_EditorClassIdentifier: 
   tile: {fileID: 0}
-  typeBlock: 15
+  typeBlock: 16
   typeAction: 2
   range: {x: 5, y: 4}
-  isStackable: 1
+  isStackable: 0
   isInteractable: 1
   prefab: {fileID: 7843301527956143239, guid: 489ab2e1072c3064ea6c92ccdea73a74, type: 3}

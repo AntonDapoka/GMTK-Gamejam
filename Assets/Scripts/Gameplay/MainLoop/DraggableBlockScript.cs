@@ -8,7 +8,7 @@ using System.Collections.Generic;
 /// Ѕлок, который можно перетаскивать, вставл€ть в специальные слоты других блоков,
 /// а также извлекать по клику.
 /// </summary>
-public class DraggableBlockScript : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
+public class DraggableBlockScript : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler//, IPointerClickHandler
 {
     [Header("UI")]
     public Image image;
@@ -18,7 +18,7 @@ public class DraggableBlockScript : MonoBehaviour, IBeginDragHandler, IDragHandl
     public BlockScript block;
     [HideInInspector] public int count = 1;
     [HideInInspector] public Transform parentAfterDrag;
-    [HideInInspector] public DraggableBlockScript originalBlock;
+    public DraggableBlockScript originalBlock;
 
     // —писок слотов внутри этого блока (если они есть)
     public List<Image> slotImages = new List<Image>();
@@ -137,7 +137,27 @@ public class DraggableBlockScript : MonoBehaviour, IBeginDragHandler, IDragHandl
             else
                 txt.raycastTarget = false;
         }
-            
+
+        if (originalBlock != null)
+        {
+            originalBlock.image.raycastTarget = true;
+
+            foreach (var img in originalBlock.GetComponentsInChildren<Image>())
+            {
+                if (img.GetComponent<SlotMarker>() != null || img.GetComponent<ShouldBeActiveMarker>() != null)
+                    img.raycastTarget = true;
+                else
+                    img.raycastTarget = false;
+            }
+
+            foreach (var txt in originalBlock.GetComponentsInChildren<TextMeshProUGUI>())
+            {
+                if (txt.GetComponent<SlotMarker>() != null || txt.GetComponent<ShouldBeActiveMarker>() != null)
+                    txt.raycastTarget = true;
+                else
+                    txt.raycastTarget = false;
+            }
+        }
 
         // ѕровер€ем, отпустили ли мы над слотом
         var target = eventData.pointerEnter;
@@ -165,12 +185,16 @@ public class DraggableBlockScript : MonoBehaviour, IBeginDragHandler, IDragHandl
             {
                 originalBlock.count++;
                 originalBlock.RefreshCount();
+
+                
             }
 
             Destroy(gameObject);
         }
-    }
 
+        
+    }
+    /*
     // === CLICK ===
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -181,5 +205,5 @@ public class DraggableBlockScript : MonoBehaviour, IBeginDragHandler, IDragHandl
             transform.position = Input.mousePosition;
             parentAfterDrag = null;
         }
-    }
+    }*/
 }
