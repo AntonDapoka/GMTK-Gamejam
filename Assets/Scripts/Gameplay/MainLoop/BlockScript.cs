@@ -12,6 +12,7 @@ public class BlockScript : ScriptableObject
 
     [Header("Only UI")]
     public bool isStackable = true;
+    public bool isInteractable = true;
     public GameObject prefab;
 
 }

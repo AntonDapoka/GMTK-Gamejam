@@ -71,21 +71,20 @@ public class BlockAssembleScript : MonoBehaviour
             }
             yield return new WaitForSeconds(delay);
 
-            Debug.Log("-----------------------------------------------");
+            //Debug.Log("-----------------------------------------------");
             //index = (index + 1) % assemblerSlots.Length;
         }
     }
 
     private void SetBlock(int id, int pos)
     {
-        BlockScript block = new BlockScript();
-        block = typesHolder.blocksTypes[id];
+        BlockScript block = typesHolder.blocksTypes[id];
         SpawnBlock(block, assemblerSlots[pos]);
     }
 
     public void SpawnBlock(BlockScript block, AssemblerSlotScript slot)
     {
-        GameObject newBlockGo = Instantiate(blockPrefab, slot.transform);
+        GameObject newBlockGo = Instantiate(block.prefab, slot.transform);
         DraggableBlockScript draggableBlock = newBlockGo.GetComponent<DraggableBlockScript>();
         draggableBlock.InitializeBlock(block);
     }

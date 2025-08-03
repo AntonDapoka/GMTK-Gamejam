@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8168926aae09aee449fdd10a0591452f, type: 3}
-  m_Name: StartBlock
+  m_Name: BasicBulletBlock
   m_EditorClassIdentifier: 
   tile: {fileID: 0}
-  typeBlock: 0
+  typeBlock: 8
   typeAction: 0
   range: {x: 5, y: 4}
-  isStackable: 0
-  isInteractable: 0
-  prefab: {fileID: 7843301527956143239, guid: d9c2423d72b1894439d228eb93de0645, type: 3}
+  isStackable: 1
+  isInteractable: 1
+  prefab: {fileID: 7843301527956143239, guid: 6cd1c9eaaf3fa824e920a59a837ff45c, type: 3}

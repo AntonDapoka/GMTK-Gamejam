@@ -16,8 +16,9 @@ public class InventoryScript : MonoBehaviour
         {
             InventorySlotScript slot = inventorySlots[i];
             DraggableBlockScript blockInSlot = slot.GetComponentInChildren<DraggableBlockScript>();
+            //Debug.Log(blockInSlot != null ? "YES" : "No");
             if (blockInSlot != null &&
-                blockInSlot.block == block &&
+                blockInSlot.block.typeBlock == block.typeBlock &&
                 blockInSlot.count < maxStackedBlocks &&
                 blockInSlot.block.isStackable)
 
@@ -43,7 +44,7 @@ public class InventoryScript : MonoBehaviour
 
     public void SpawnBlock(BlockScript block, InventorySlotScript slot)
     {
-        GameObject newBlockGo = Instantiate(draggableBlockPrefab, slot.transform);
+        GameObject newBlockGo = Instantiate(block.prefab, slot.transform);
         DraggableBlockScript draggableBlock = newBlockGo.GetComponent<DraggableBlockScript>();
         draggableBlock.InitializeBlock(block);
     }
