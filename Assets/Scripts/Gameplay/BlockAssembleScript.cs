@@ -56,7 +56,8 @@ public class BlockAssembleScript : MonoBehaviour
                 for (int i = minIndex; i < maxIndex; i++)
                 {
                     AssemblerSlotScript slot = assemblerSlots[i];
-                    slot.GetComponent<Image>().color = i % 2 == 0 ? color1 : color2;
+                    //slot.GetComponent<Image>().color = i % 2 == 0 ? color1 : color2;
+                    //slot.GetComponent<Image>().color/ = 1f;
                     DraggableBlockScript blockInSlot = slot.GetComponentInChildren<DraggableBlockScript>();
                     if (blockInSlot != null)
                     {
