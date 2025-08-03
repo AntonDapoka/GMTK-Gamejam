@@ -34,7 +34,8 @@ public enum BlockType
 
     Health,
     Size,
-    Count,
+    EnemyCount,
+    BulletCount,
     Damage,
     Speed,
     Increment,

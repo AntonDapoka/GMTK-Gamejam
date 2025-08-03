@@ -32,10 +32,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2830820067351579316}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 193.62845, y: 0}
-  m_SizeDelta: {x: 361.0568, y: 50}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 130.3537, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1782683014102206030
 CanvasRenderer:
@@ -65,7 +65,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Bullet.Basic;
+  m_text: 'Bullet
+
+    Basic;'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6e67958955604af4e819d07844958045, type: 2}
   m_sharedMaterial: {fileID: -9114147990601083055, guid: 6e67958955604af4e819d07844958045, type: 2}
@@ -92,19 +94,19 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 80
-  m_fontSizeBase: 80
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: -33.86
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -146,6 +148,7 @@ GameObject:
   - component: {fileID: 9042498884566654335}
   - component: {fileID: 7488989668946843215}
   - component: {fileID: 3357391220382284333}
+  - component: {fileID: 897769034413003289}
   m_Layer: 5
   m_Name: BulletBasic
   m_TagString: Untagged
@@ -172,7 +175,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 386.5, y: 71.2}
+  m_SizeDelta: {x: 148.64, y: 91.7207}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9042498884566654335
 CanvasRenderer:
@@ -230,6 +233,19 @@ MonoBehaviour:
   count: 1
   parentAfterDrag: {fileID: 0}
   originalBlock: {fileID: 0}
+  slotImages: []
+--- !u!114 &897769034413003289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7843301527956143239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f805808d3d510a45b2c574aa5e52aae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9061277394292558679
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,7 +280,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 135, y: -20.8}
+  m_AnchoredPosition: {x: 83.678, y: -31.571}
   m_SizeDelta: {x: 37.0029, y: 13.1427}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8057078324632707026

@@ -466,6 +466,7 @@ GameObject:
   - component: {fileID: 3479769124528792208}
   - component: {fileID: 8956014130169428875}
   - component: {fileID: 7273922723775080833}
+  - component: {fileID: 17242586835909137}
   m_Layer: 5
   m_Name: InputField (TMP)
   m_TagString: Untagged
@@ -629,6 +630,18 @@ MonoBehaviour:
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 0
   m_InputValidator: {fileID: 0}
+--- !u!114 &17242586835909137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7388229304236980003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f805808d3d510a45b2c574aa5e52aae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7843301527956143239
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,6 +655,7 @@ GameObject:
   - component: {fileID: 7488989668946843215}
   - component: {fileID: 4503952416403941925}
   - component: {fileID: 4119029137806836749}
+  - component: {fileID: -4389835721594055293}
   m_Layer: 5
   m_Name: WriteBlock
   m_TagString: Untagged
@@ -741,6 +755,19 @@ MonoBehaviour:
   count: 1
   parentAfterDrag: {fileID: 0}
   originalBlock: {fileID: 0}
+  slotImages: []
+--- !u!114 &-4389835721594055293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7843301527956143239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f805808d3d510a45b2c574aa5e52aae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8909452809966500852
 GameObject:
   m_ObjectHideFlags: 0

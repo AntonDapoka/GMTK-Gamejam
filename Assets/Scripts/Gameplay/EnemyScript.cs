@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    [SerializeField] private int damage = 10; // Урон, который наносит враг при столкновении
+    //[SerializeField] private int damage = 10; // Урон, который наносит враг при столкновении
 
     private void OnTriggerEnter(Collider other)
     {

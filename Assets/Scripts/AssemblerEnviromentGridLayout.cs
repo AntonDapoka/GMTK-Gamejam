@@ -55,7 +55,6 @@ public class AssemblerEnviromentGridLayout : MonoBehaviour
         if (rectTransform == null)
             rectTransform = GetComponent<RectTransform>();
 
-        // Получаем список детей без исключений
         List<RectTransform> validChildren = new List<RectTransform>();
         foreach (RectTransform child in rectTransform)
         {
@@ -69,20 +68,19 @@ public class AssemblerEnviromentGridLayout : MonoBehaviour
         int columns = Mathf.Max(1, constraintCount);
         int rows = Mathf.CeilToInt((float)validChildren.Count / columns);
 
-        // Текущий размер родителя
-        float parentWidth = rectTransform.rect.width;
-        float parentHeight = rectTransform.rect.height;
-
         // Общий размер сетки
         float totalWidth = columns * cellSize.x + (columns - 1) * spacing.x;
         float totalHeight = rows * cellSize.y + (rows - 1) * spacing.y;
 
-        // Центровка с учетом padding
-        float availableWidth = parentWidth - padding.left - padding.right;
-        float availableHeight = parentHeight - padding.top - padding.bottom;
+        // ВАЖНО: обновляем размер контента под сетку + паддинги
+        rectTransform.sizeDelta = new Vector2(
+            padding.left + padding.right + totalWidth,
+            padding.top + padding.bottom + totalHeight
+        );
 
-        float startX = padding.left + (availableWidth - totalWidth) / 2f;
-        float startY = -padding.top - (availableHeight - totalHeight) / 2f;
+        // Начальная точка (левый верх)
+        float startX = padding.left;
+        float startY = -padding.top;
 
         for (int i = 0; i < validChildren.Count; i++)
         {
@@ -101,4 +99,5 @@ public class AssemblerEnviromentGridLayout : MonoBehaviour
             child.sizeDelta = cellSize;
         }
     }
+
 }

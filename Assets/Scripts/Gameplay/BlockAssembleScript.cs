@@ -43,8 +43,6 @@ public class BlockAssembleScript : MonoBehaviour
 
     private IEnumerator MainLoop()
     {
-        int index = 0;
-
 
         while (true)
         {

@@ -221,6 +221,7 @@ GameObject:
   - component: {fileID: 9042498884566654335}
   - component: {fileID: 7488989668946843215}
   - component: {fileID: 3357391220382284333}
+  - component: {fileID: 3968015241723514445}
   m_Layer: 5
   m_Name: ShootBlock 2
   m_TagString: Untagged
@@ -306,6 +307,19 @@ MonoBehaviour:
   count: 1
   parentAfterDrag: {fileID: 0}
   originalBlock: {fileID: 0}
+  slotImages: []
+--- !u!114 &3968015241723514445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7843301527956143239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f805808d3d510a45b2c574aa5e52aae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9061277394292558679
 GameObject:
   m_ObjectHideFlags: 0

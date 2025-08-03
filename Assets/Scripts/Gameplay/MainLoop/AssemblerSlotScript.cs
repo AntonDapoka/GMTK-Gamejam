@@ -13,15 +13,19 @@ public class AssemblerSlotScript : MonoBehaviour, IDropHandler
         if (transform.childCount == 0)
         {
             DraggableBlockScript block = eventData.pointerDrag.GetComponent<DraggableBlockScript>();
-            block.parentAfterDrag = transform;
 
-            if (block.block.typeBlock == BlockType.Start)
+            if (block != null)
             {
-                assembler.ChangeBlockStartIndex(index);
-            }
-            else if (block.block.typeBlock == BlockType.End)
-            {
-                assembler.ChangeBlockEndIndex(index);
+                block.parentAfterDrag = transform;
+
+                if (block.block.typeBlock == BlockType.Start)
+                {
+                    assembler.ChangeBlockStartIndex(index);
+                }
+                else if (block.block.typeBlock == BlockType.End)
+                {
+                    assembler.ChangeBlockEndIndex(index);
+                }
             }
         }
     }

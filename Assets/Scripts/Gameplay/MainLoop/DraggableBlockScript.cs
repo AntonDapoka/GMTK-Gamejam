@@ -2,28 +2,55 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
-public class DraggableBlockScript : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+/// <summary>
+/// Ѕлок, который можно перетаскивать, вставл€ть в специальные слоты других блоков,
+/// а также извлекать по клику.
+/// </summary>
+public class DraggableBlockScript : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
+    [Header("UI")]
     public Image image;
     public TextMeshProUGUI textCount;
 
+    [Header("ƒанные")]
     public BlockScript block;
     [HideInInspector] public int count = 1;
     [HideInInspector] public Transform parentAfterDrag;
     [HideInInspector] public DraggableBlockScript originalBlock;
 
+    // —писок слотов внутри этого блока (если они есть)
+    public List<Image> slotImages = new List<Image>();
+
+    private Canvas rootCanvas;
+
+    private void Awake()
+    {
+        rootCanvas = GetComponentInParent<Canvas>();
+    }
+
     public void InitializeBlock(BlockScript newBlock)
     {
         block = newBlock;
 
+        image.raycastTarget = true;
+
         foreach (var img in gameObject.GetComponentsInChildren<Image>())
-            img.raycastTarget = false;
+        {
+            if (img.GetComponent<SlotMarker>() != null || img.GetComponent<ShouldBeActiveMarker>() != null)
+                img.raycastTarget = true;
+            else
+                img.raycastTarget = false;
+        }
 
         foreach (var txt in gameObject.GetComponentsInChildren<TextMeshProUGUI>())
-            txt.raycastTarget = false;
-
-        image.raycastTarget = true;
+        {
+            if (txt.GetComponent<SlotMarker>() != null || txt.GetComponent<ShouldBeActiveMarker>() != null)
+                txt.raycastTarget = true;
+            else
+                txt.raycastTarget = false;
+        }
 
         RefreshCount();
     }
@@ -34,11 +61,24 @@ public class DraggableBlockScript : MonoBehaviour, IBeginDragHandler, IDragHandl
         textCount.gameObject.SetActive(count > 1);
     }
 
+    // === DRAG ===
+
     public void OnBeginDrag(PointerEventData eventData)
     {
-        // ≈сли блок не интерактивен Ч выходим
         if (block == null || !block.isInteractable)
             return;
+
+        foreach (var img in gameObject.GetComponentsInChildren<Image>())
+        {
+            img.raycastTarget = false;
+        }
+
+        // ≈сли блок находитс€ в слоте Ч вынимаем его
+        if (transform.parent != null && transform.parent.TryGetComponent<Image>(out var slotParent)
+            && slotImages.Contains(slotParent) == false)
+        {
+            parentAfterDrag = null; // мы вынимаем его
+        }
 
         if (count > 1)
         {
@@ -54,7 +94,7 @@ public class DraggableBlockScript : MonoBehaviour, IBeginDragHandler, IDragHandl
 
             cloneScript.parentAfterDrag = null;
             cloneScript.image.raycastTarget = false;
-            cloneScript.transform.SetParent(transform.root);
+            cloneScript.transform.SetParent(rootCanvas.transform);
             cloneScript.transform.position = Input.mousePosition;
 
             eventData.pointerDrag = clone;
@@ -63,7 +103,7 @@ public class DraggableBlockScript : MonoBehaviour, IBeginDragHandler, IDragHandl
         {
             image.raycastTarget = false;
             parentAfterDrag = transform.parent;
-            transform.SetParent(transform.root);
+            transform.SetParent(rootCanvas.transform);
         }
     }
 
@@ -82,6 +122,39 @@ public class DraggableBlockScript : MonoBehaviour, IBeginDragHandler, IDragHandl
 
         image.raycastTarget = true;
 
+        foreach (var img in gameObject.GetComponentsInChildren<Image>())
+        {
+            if (img.GetComponent<SlotMarker>() != null || img.GetComponent<ShouldBeActiveMarker>() != null) 
+                img.raycastTarget = true;
+            else
+                img.raycastTarget = false;
+        }
+
+        foreach (var txt in gameObject.GetComponentsInChildren<TextMeshProUGUI>())
+        {
+            if (txt.GetComponent<SlotMarker>() != null || txt.GetComponent<ShouldBeActiveMarker>() != null) 
+                txt.raycastTarget = true;
+            else
+                txt.raycastTarget = false;
+        }
+            
+
+        // ѕровер€ем, отпустили ли мы над слотом
+        var target = eventData.pointerEnter;
+        if (target != null)
+        {
+            Image slotImage = target.GetComponent<Image>();
+
+            if (slotImage != null && slotImage.GetComponent<SlotMarker>() != null) // тег "Slot" дл€ слотов
+            {
+                // ¬ставл€ем этот блок в слот
+                transform.SetParent(slotImage.transform);
+                transform.localPosition = Vector3.zero;
+                return;
+            }
+        }
+
+        // ≈сли не попали в слот Ч возвращаем на место или уничтожаем
         if (parentAfterDrag != null)
         {
             transform.SetParent(parentAfterDrag);
@@ -95,6 +168,18 @@ public class DraggableBlockScript : MonoBehaviour, IBeginDragHandler, IDragHandl
             }
 
             Destroy(gameObject);
+        }
+    }
+
+    // === CLICK ===
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        // ≈сли блок вставлен в слот Ч по клику извлекаем его
+        if (transform.parent != null && transform.parent.GetComponent<SlotMarker>() != null)
+        {
+            transform.SetParent(rootCanvas.transform);
+            transform.position = Input.mousePosition;
+            parentAfterDrag = null;
         }
     }
 }
