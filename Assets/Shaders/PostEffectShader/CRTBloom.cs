@@ -17,7 +17,6 @@ public class CRTBloom : PostEffectbase
     [Range(1, 8)] public int iteration = 1;
     [Range(0, 3)] public float blurSpread = 0.6f;
 
-
     protected override void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
        if(material != null)
@@ -48,7 +47,7 @@ public class CRTBloom : PostEffectbase
                 material.SetFloat("_BlurSpread", 1 + i * blurSpread);
 
                 RenderTexture buffer1 = RenderTexture.GetTemporary(rtw, rtH, 0);
-
+                
                 Graphics.Blit(buffer, buffer1, material, 2);
                 RenderTexture.ReleaseTemporary(buffer);
 

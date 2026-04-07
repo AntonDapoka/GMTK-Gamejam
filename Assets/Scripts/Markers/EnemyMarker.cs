@@ -1,6 +1,3 @@
 using UnityEngine;
 
-public class EnemyMarker : MonoBehaviour
-{
-
-}
+public class EnemyMarker : MonoBehaviour {}

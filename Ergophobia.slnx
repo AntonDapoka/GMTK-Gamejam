@@ -2,5 +2,4 @@
   <Project Path="Assembly-CSharp.csproj" />
   <Project Path="RetroTVFX.Runtime.csproj" />
   <Project Path="RetroTVFX.Editor.csproj" />
-  <Project Path="Assembly-CSharp-Editor.csproj" />
 </Solution>
