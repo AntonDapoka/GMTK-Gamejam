@@ -55,7 +55,7 @@ public class PlayerMovementScript : MonoBehaviour
 
         if (inputDirection != Vector3.zero)
         {
-            // Поворот на 45 градусов вокруг Y
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ 45 пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ Y
             Quaternion rotation = Quaternion.Euler(0f, -135f, 0f);
             moveDirection = rotation * inputDirection;
         }
@@ -76,7 +76,7 @@ public class PlayerMovementScript : MonoBehaviour
         {
             return;
         }
-        rb.velocity = new Vector3(moveDirection.x*moveSpeed,0, moveDirection.z * moveSpeed); 
+        rb.linearVelocity = new Vector3(moveDirection.x*moveSpeed,0, moveDirection.z * moveSpeed); 
     }
 
     private IEnumerator Dash()
@@ -94,14 +94,14 @@ public class PlayerMovementScript : MonoBehaviour
             float power = dashingCurve.Evaluate(t) * dashingPower;
 
 
-            rb.velocity = dashDirection * power;
+            rb.linearVelocity = dashDirection * power;
             elapsed += Time.deltaTime;
             yield return null;
         }
 
 
 
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
         trail.emitting = false;
         isDashing = false;
 
