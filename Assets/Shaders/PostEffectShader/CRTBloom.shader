@@ -167,8 +167,137 @@ Shader "Unlit/CRTBloom"
        }
 
         //复用高斯模糊的两个Pass
-        UsePass "Unlit/Lesson106_GaussianBlur/GAUSSIAN_BLUR_HORIZONTAL"
-        UsePass "Unlit/Lesson106_GaussianBlur/GAUSSIAN_BLUR_VERTICAL"
+       //Horizontal
+        pass
+        {
+             CGPROGRAM
+             #pragma vertex vertBlurHorizontal
+            #pragma fragment fragBlur
+        #include "UnityCG.cginc"
+        sampler2D _MainTex;
+        //纹素  x = 1/宽  y = 1/高
+        half4 _MainTex_TexelSize;
+        //纹理偏移间隔单位
+        float _BlurSpread;
+
+         struct v2f
+         {
+             //五个像素的uv坐标偏移
+                half2 uv[5] : TEXCOORD0; 
+             //顶点再裁剪空间下坐标
+                float4 vertex : SV_POSITION;
+         };
+
+         //水平方向的 顶点着色器函数
+         v2f vertBlurHorizontal(appdata_base v)
+         {
+             v2f o;
+             o.vertex = UnityObjectToClipPos(v.vertex);
+
+             //5个像素的uv偏移了
+             half2 uv = v.texcoord;
+
+             //去进行5个像素 水平位置的偏移获取
+             o.uv[0] = uv;
+             o.uv[1] = uv + half2(_MainTex_TexelSize.x *1 ,0)*_BlurSpread;
+             o.uv[2] = uv - half2(_MainTex_TexelSize.x *1 ,0)*_BlurSpread;
+             o.uv[3] = uv + half2(_MainTex_TexelSize.x*2,0)*_BlurSpread;
+             o.uv[4] = uv - half2(_MainTex_TexelSize.x*2,0)*_BlurSpread; 
+             
+             return o;
+         }
+
+         //片元着色器函数
+         //两个Pass可以使用同一个 我们把里面的逻辑写的通用即可
+         fixed4 fragBlur(v2f i):SV_Target
+         {
+             //卷积运算
+             //卷积核 其中三个 因为只有这三个数 没有必要申明为5个单位的卷积和
+             float weight[3] = {0.4026,0.2442,0.0545};
+             //先计算当前像素点
+             fixed3 sum = tex2D(_MainTex,i.uv[0]).rgb * weight[0];
+
+             //去计算左右偏移一个单位的 和 左右偏移两个单位的 对位相乘 累加
+            for (int it = 1; it < 3; it++)
+            {
+                
+                //要和右元素相乘
+                sum += tex2D(_MainTex,i.uv[it*2 - 1]).rgb * weight[it];
+                //和左元素相乘
+                sum += tex2D(_MainTex,i.uv[it*2]).rgb * weight[it];
+            }
+
+            return fixed4(sum,1);
+
+         }
+            ENDCG
+        }
+        //vertical
+        pass
+        {
+             CGPROGRAM
+              #pragma vertex vertBlurVertical
+            #pragma fragment fragBlur
+        #include "UnityCG.cginc"
+        sampler2D _MainTex;
+        //纹素  x = 1/宽  y = 1/高
+        half4 _MainTex_TexelSize;
+        //纹理偏移间隔单位
+        float _BlurSpread;
+
+         struct v2f
+         {
+             //五个像素的uv坐标偏移
+                half2 uv[5] : TEXCOORD0; 
+             //顶点再裁剪空间下坐标
+                float4 vertex : SV_POSITION;
+         };
+
+        
+
+         //垂直方向的 顶点着色器函数
+         v2f vertBlurVertical(appdata_base v)
+         {
+             v2f o;
+             o.vertex = UnityObjectToClipPos(v.vertex);
+
+             //5个像素的uv偏移了
+             half2 uv = v.texcoord;
+
+             //去进行5个像素 水平位置的偏移获取
+             o.uv[0] = uv;
+             o.uv[1] = uv + half2(0,_MainTex_TexelSize.x *1)*_BlurSpread;
+             o.uv[2] = uv - half2(0,_MainTex_TexelSize.x *1 )*_BlurSpread;
+             o.uv[3] = uv + half2(0,_MainTex_TexelSize.x*2)*_BlurSpread;
+             o.uv[4] = uv - half2(0,_MainTex_TexelSize.x*2)*_BlurSpread; 
+             
+             return o;
+         }
+
+         //片元着色器函数
+         //两个Pass可以使用同一个 我们把里面的逻辑写的通用即可
+         fixed4 fragBlur(v2f i):SV_Target
+         {
+             //卷积运算
+             //卷积核 其中三个 因为只有这三个数 没有必要申明为5个单位的卷积和
+             float weight[3] = {0.4026,0.2442,0.0545};
+             //先计算当前像素点
+             fixed3 sum = tex2D(_MainTex,i.uv[0]).rgb * weight[0];
+
+             //去计算左右偏移一个单位的 和 左右偏移两个单位的 对位相乘 累加
+            for (int it = 1; it < 3; it++)
+            {
+                
+                //要和右元素相乘
+                sum += tex2D(_MainTex,i.uv[it*2 - 1]).rgb * weight[it];
+                //和左元素相乘
+                sum += tex2D(_MainTex,i.uv[it*2]).rgb * weight[it];
+            }
+
+            return fixed4(sum,1);
+        }
+            ENDCG
+        }
 
           //用于合成的Pass
         pass
